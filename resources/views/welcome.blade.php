@@ -21,9 +21,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">        
-        <Fetch></Fetch>
-        @{{ info }}
-    </div>        
+    <div id="app">
+        <Fetch></Fetch>    
+    </div>
+    
 </body>
 </html>
