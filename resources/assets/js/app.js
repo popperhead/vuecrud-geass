@@ -23,6 +23,7 @@ Vue.component(
   require("./components/Fetch.vue")
 );
 
+
 const app = new Vue({
   el: "#app"
 });

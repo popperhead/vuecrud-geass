@@ -47818,6 +47818,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -47837,13 +47838,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
-        getUrl: function getUrl(id) {
-            return "/users/" + id;
+        del: function del(user, id) {
+            axios.delete('/user/' + id).then(function (resp) {
+                app.users = resp.data;
+                alert("Deleted");
+            }).catch(function (resp) {
+                console.log(resp);
+                alert("Cannot Delete the User");
+            });
         },
-
-        greet: function greet(event) {
-
-            alert('delete clicked');
+        edit: function edit() {
+            //var x = $this('.delete').val();
+            alert("Edit clicked");
+        },
+        upd: function upd() {
+            //var x = $this('.delete').val();
+            alert("Update clicked");
+        },
+        add: function add() {
+            //var x = $this('.delete').val();
+            alert("Add clicked");
         }
 
     }
@@ -47858,6 +47872,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "inrow" }, [
+    _c("button", { staticClass: "add", on: { click: _vm.add } }, [
+      _vm._v("Add")
+    ]),
+    _vm._v(" "),
     _c("table", { staticClass: "table table-bordered table-striped" }, [
       _vm._m(0),
       _vm._v(" "),
@@ -47872,12 +47890,46 @@ var render = function() {
             _c("td", [_vm._v(_vm._s(user.email))]),
             _vm._v(" "),
             _c("td", [
-              _c("button", { on: { click: _vm.greet } }, [_vm._v("Delete")])
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.del(user, user.id)
+                    }
+                  }
+                },
+                [_vm._v("Delete")]
+              )
             ]),
             _vm._v(" "),
-            _vm._m(1, true),
+            _c("td", [
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.edit(user, user.id)
+                    }
+                  }
+                },
+                [_vm._v("Edit")]
+              )
+            ]),
             _vm._v(" "),
-            _vm._m(2, true)
+            _c("td", [
+              _c(
+                "button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.upd(user, user.id)
+                    }
+                  }
+                },
+                [_vm._v("Update")]
+              )
+            ])
           ])
         })
       )
@@ -47904,18 +47956,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Update")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [_c("button", [_vm._v("Edit")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [_c("button", [_vm._v("Update")])])
   }
 ]
 render._withStripped = true
