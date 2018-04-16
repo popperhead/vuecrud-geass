@@ -17,4 +17,13 @@ class UsersController extends Controller
         $users = $user::destroy($id);
         return "Deleted";
     }
+    public function create(Request $r){
+        //return $r;
+        $user = new User;
+
+        $user->name= $r->name;
+        $user->email= $r->email;
+        $user->password =bcrypt('secret');
+        $user->save();
+    }
 }

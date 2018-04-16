@@ -47420,7 +47420,7 @@ exports = module.exports = __webpack_require__(45)(false);
 
 
 // module
-exports.push([module.i, "\n.inrow{\n    display:-webkit-inline-box;\n    display:-ms-inline-flexbox;\n    display:inline-flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    width:auto;\n    margin-left:5%;\n}\n", ""]);
+exports.push([module.i, "\n.inrow{\n    display:-webkit-inline-box;\n    display:-ms-inline-flexbox;\n    display:inline-flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    width:auto;\n    margin-left:5%;\n}\n.myModal{\n\tposition:fixed;\n\ttop:0;\n\tleft:0;\n\tright:0;\n\tbottom:0;\n\tbackground: rgba(0, 0, 0, 0.4);\n}\n.modalContainer{\n\twidth: 555px;\n\tbackground: #FFFFFF;\n\tmargin:auto;\n\tmargin-top:50px;\n}\n.modalHeader{\n\tpadding:10px;\n\tbackground: #008CBA;\n\tcolor: #FFFFFF;\n\theight:50px;\n\tfont-size:20px;\n\tpadding-left:15px;\n}\n.modalBody{\n\tpadding:40px;\n}\n.modalFooter{\n\theight:36px;\n}\n.footerBtn{\n\tmargin-right:10px;\n\tmargin-top:-9px;\n}\n.closeBtn{\n\tbackground: #008CBA;\n\tcolor: #FFFFFF;\n\tborder:none;\n}\n", ""]);
 
 // exports
 
@@ -47819,15 +47819,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            users: []
+            users: [],
+            showadd: false,
+            name: "",
+            email: "",
+            log: ""
         };
     },
     mounted: function mounted() {
         var app = this;
+
         axios.get('/user').then(function (resp) {
             app.users = resp.data;
         }).catch(function (resp) {
@@ -47840,8 +47876,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         del: function del(user, id) {
             axios.delete('/user/' + id).then(function (resp) {
-                app.users = resp.data;
-                alert("Deleted");
+                console.log(id);
+                window.location.reload(true);
             }).catch(function (resp) {
                 console.log(resp);
                 alert("Cannot Delete the User");
@@ -47858,8 +47894,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         add: function add() {
             //var x = $this('.delete').val();
             alert("Add clicked");
-        }
+        },
+        sub: function sub(event) {
 
+            if (this.name == "" || this.email == "") {
+
+                this.log = "Empty Inputs Please Enter Some Value";
+                event.preventDefault();
+            } else {
+                this.log = this.name + ' ' + this.email;
+                axios.get('/user/create/', {
+                    params: {
+                        name: this.name,
+                        email: this.email
+                    }
+                }).then(function (resp) {
+                    console.log('inserted' + resp);
+                    window.location.reload(true);
+                }).catch(function (resp) {
+                    console.log(resp);
+                    alert("Cannot add new User");
+                });
+                event.preventDefault();
+            }
+        }
     }
 });
 
@@ -47872,17 +47930,101 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "inrow" }, [
-    _c("button", { staticClass: "add", on: { click: _vm.add } }, [
-      _vm._v("Add")
-    ]),
+    _c(
+      "button",
+      {
+        staticClass: "add",
+        attrs: { "data-toggle": "modal", "data-target": "#myModal" }
+      },
+      [_vm._v("Add")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "modal fade", attrs: { id: "myModal", role: "dialog" } },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("div", { staticClass: "inrow" }, [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.log) +
+                    "\n                        "
+                ),
+                _c("form", { on: { submit: _vm.sub } }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.name,
+                        expression: "name"
+                      }
+                    ],
+                    attrs: {
+                      type: "text",
+                      name: "name",
+                      placeholder: "Enter Name Here"
+                    },
+                    domProps: { value: _vm.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.name = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.email,
+                        expression: "email"
+                      }
+                    ],
+                    attrs: {
+                      type: "text",
+                      name: "email",
+                      placeholder: "Enter Email Here"
+                    },
+                    domProps: { value: _vm.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.email = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("button", { attrs: { type: "submit" } }, [
+                    _vm._v("Add New Record")
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(1)
+          ])
+        ])
+      ]
+    ),
     _vm._v(" "),
     _c("table", { staticClass: "table table-bordered table-striped" }, [
-      _vm._m(0),
+      _vm._m(2),
       _vm._v(" "),
       _c(
         "tbody",
         _vm._l(_vm.users, function(user) {
-          return _c("tr", [
+          return _c("tr", { key: user.id }, [
             _c("td", [_vm._v(_vm._s(user.id))]),
             _vm._v(" "),
             _c("td", [_vm._v(_vm._s(user.name))]),
@@ -47937,6 +48079,38 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("×")]
+      ),
+      _vm._v(" "),
+      _c("h4", { staticClass: "modal-title" }, [_vm._v("Add New Record")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-default",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
