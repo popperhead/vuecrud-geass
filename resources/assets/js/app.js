@@ -7,6 +7,8 @@
 require("./bootstrap");
 
 window.Vue = require("vue");
+import VModal from "vue-js-modal";
+Vue.use(VModal);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -14,14 +16,10 @@ window.Vue = require("vue");
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component(
-  "example-component",
-  require("./components/ExampleComponent.vue")
-);
-Vue.component(
-  "Fetch",
-  require("./components/Fetch.vue")
-);
+
+Vue.component("Fetch",require("./components/Fetch.vue"));
+Vue.component("articles", require("./components/Article.vue"));
+//Vue.component("modal", require("./components/Modal.vue"));
 
 
 const app = new Vue({

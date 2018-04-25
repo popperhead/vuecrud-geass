@@ -10,11 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
+// blog api starts
+Route::get('/', 'ArticlesController@index');
+Route::get('/fetch', 'ArticlesController@fetch');
+Route::post('/createarticle','ArticlesController@create');
+Route::post('/deletearticle','ArticlesController@delete');
+Route::post('/editarticle','ArticlesController@edit');
+// blog api ends
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
