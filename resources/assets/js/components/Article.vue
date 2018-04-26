@@ -9,6 +9,8 @@
                     <input class="form-control" type="text" v-model="title" placeholder="Enter Article Title Here">
                     <br/>
                     <textarea v-model="body" class="form-control" placeholder="Enter Article Body Here"></textarea>
+                    <br/>                    
+                    <editor></editor>                    
                     <br/>
                     <input class="form-control" type="submit" value="Create Article">
                 </form>
@@ -31,7 +33,7 @@
                     <input type="hidden" class="form-control" v-model="editid">
                     <input class="form-control" type="text" v-model="edittitle" placeholder="Enter Article Title Here">
                     <br/>
-                    <textarea v-model="editbody" class="form-control" placeholder="Enter Article Body Here"></textarea>
+                    <textarea v-model="editbody" class="form-control" placeholder="Enter Article Body Here"></textarea>                    
                     <br/>
                     <input class="form-control" type="submit" value="Create Article">
                 </form>
@@ -50,6 +52,7 @@
                edittitle:'',
                editbody:'',
                editid:0,
+               content:''
             }
         },
         mounted() {
@@ -110,4 +113,5 @@
                 
             }
         }
-    }</script>
+    }
+</script>

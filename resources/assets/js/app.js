@@ -7,7 +7,9 @@
 require("./bootstrap");
 
 window.Vue = require("vue");
+import Vuex from "vuex";
 import VModal from "vue-js-modal";
+import { VueEditor } from 'vue2-editor';
 Vue.use(VModal);
 
 /**
@@ -19,8 +21,8 @@ Vue.use(VModal);
 
 Vue.component("Fetch",require("./components/Fetch.vue"));
 Vue.component("articles", require("./components/Article.vue"));
+Vue.component("editor", require("./components/Editor.vue"));
 //Vue.component("modal", require("./components/Modal.vue"));
-
 
 const app = new Vue({
   el: "#app"
